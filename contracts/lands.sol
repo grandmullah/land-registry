@@ -1,5 +1,5 @@
 pragma solidity 0.5.4;
-pragma experimental ABIEncoderV2;
+// pragma experimental ABIEncoderV2;
 
 contract Lands {
     
@@ -51,9 +51,9 @@ contract Lands {
 
     address private government;
 
-    constructor ()public {
-        government = msg.sender;
-    }
+    // constructor ()public {
+    //     government = msg.sender;
+    // }
    
     // modifier name() {
     //     _
@@ -125,7 +125,15 @@ contract Lands {
 
     } 
 
-    function registeredLands()public view returns(Title[] memory) {
-        return titleDetails;
+    function registeredLands()public view returns(bytes32[] memory ln, bytes32[] memory sz, bytes32[] memory  lo) {
+        ln = new bytes32[](titleDetails.length);
+        sz = new bytes32[](titleDetails.length);
+        lo = new bytes32[](titleDetails.length);
+        for (uint i = 0; i < titleDetails.length; i++) {
+            ln[i] = titleDetails[i].landNumber;
+            sz[i] = titleDetails[i].size;
+            lo[i] = titleDetails[i].location;
+        }
+        return(ln, sz, lo);
     }
 }
