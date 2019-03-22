@@ -9,6 +9,7 @@ contract('land test',async accounts =>{
     let loc = web3.fromAscii("kericho");
     let size =web3.fromAscii("24 acres");
     await instance.registerLand(landnumb,loc,size,24,-31,"27/02/1996","dskgdkgfk",{from: accounts[0]});
+    
     let details = await instance.titleDetails(0);
     let lan = web3.toAscii(details.location)
     let re = await instance.registeredLands()
@@ -17,7 +18,20 @@ contract('land test',async accounts =>{
     assert.strictEqual(detail.registered,true);
     assert.strictEqual(detail.alloted, false);
     assert.strictEqual(detail.issueDate, "27/02/1996" )
-    console.log(re.ln)
+    const num = re[0].length
+    const lna = 0
+    const sza = 1
+    const loa = 2
+    let struct =[]
+    for (let i = 0; i < num; i++) {
+      const p = {
+        ln : re[lna][i],
+        sz : re[sza][i],
+        lo :re[loa][i]
+      }
+      struct.push(p)
+    }
+    console.log(struct[0])
     // assert.strictEqual(re[1], 1)
   }
   );
